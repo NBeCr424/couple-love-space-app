@@ -1,0 +1,235 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: #4a2f37;
+  background: #fff8f8;
+  font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+@layer components {
+  .glass-card {
+    @apply rounded-3xl border border-white/60 bg-white/75 shadow-blush backdrop-blur-lg transition-colors duration-300;
+  }
+
+  .fade-up {
+    animation: fadeUp 0.55s cubic-bezier(0.22, 0.8, 0.32, 1) both;
+  }
+
+  .page-switch {
+    animation: pageSwitch 0.42s cubic-bezier(0.22, 0.8, 0.32, 1) both;
+  }
+
+  .soft-tap {
+    transition: transform 0.18s ease, filter 0.24s ease;
+  }
+
+  .soft-tap:active {
+    transform: scale(0.985);
+    filter: brightness(0.98);
+  }
+
+  .immersive-card {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  .immersive-card::after {
+    content: "";
+    position: absolute;
+    inset: -40%;
+    background: linear-gradient(
+      125deg,
+      rgba(255, 255, 255, 0) 30%,
+      rgba(255, 255, 255, 0.45) 46%,
+      rgba(255, 255, 255, 0) 62%
+    );
+    opacity: 0.08;
+    transform: translateX(-34%) rotate(10deg);
+    animation: cardGlimmer 10s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .immersive-card > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .story-chip-active {
+    box-shadow: 0 6px 18px rgba(232, 131, 159, 0.18);
+    animation: chipBreathe 4.2s ease-in-out infinite;
+  }
+}
+
+.romantic-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(90% 70% at 15% 8%, rgba(252, 202, 213, 0.5), transparent 68%),
+    radial-gradient(65% 55% at 88% 15%, rgba(246, 210, 223, 0.52), transparent 65%),
+    radial-gradient(40% 40% at 50% 100%, rgba(255, 225, 230, 0.38), transparent 70%),
+    linear-gradient(160deg, #fff8f8 2%, #fff3f5 48%, #fff8fb 100%);
+}
+
+.romantic-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.24;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.85) 1px, transparent 1px);
+  background-size: 18px 18px;
+}
+
+.romantic-blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(48px);
+  opacity: 0.42;
+}
+
+.twinkle-dot {
+  position: absolute;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 10px rgba(255, 215, 229, 0.7);
+  animation: twinkle 5.2s ease-in-out infinite;
+}
+
+.blob-a {
+  width: 180px;
+  height: 180px;
+  top: -36px;
+  left: -20px;
+  background: rgba(255, 183, 204, 0.62);
+  animation: floatA 12s ease-in-out infinite;
+}
+
+.blob-b {
+  width: 230px;
+  height: 230px;
+  right: -70px;
+  top: 120px;
+  background: rgba(252, 193, 213, 0.56);
+  animation: floatB 13s ease-in-out infinite;
+}
+
+.blob-c {
+  width: 185px;
+  height: 185px;
+  bottom: 60px;
+  left: 35%;
+  background: rgba(255, 205, 223, 0.44);
+  animation: floatC 14s ease-in-out infinite;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pageSwitch {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes cardGlimmer {
+  0%,
+  100% {
+    transform: translateX(-40%) rotate(10deg);
+    opacity: 0.08;
+  }
+  50% {
+    transform: translateX(36%) rotate(10deg);
+    opacity: 0.12;
+  }
+}
+
+@keyframes chipBreathe {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-1px);
+  }
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.32;
+    transform: scale(0.9);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.12);
+  }
+}
+
+@keyframes floatA {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(16px, 14px) scale(1.08);
+  }
+}
+
+@keyframes floatB {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-18px, -8px) scale(1.06);
+  }
+}
+
+@keyframes floatC {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(8px, -12px) scale(1.04);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
